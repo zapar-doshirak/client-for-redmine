@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.redmining.ui.login.LoginViewModel"/>
+        <variable
+            name="validationError"
+            type="com.example.redmining.model.ValidationError"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".ui.login.LoginFragment"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="35sp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/appNameTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_title1"
+            android:textSize="10sp"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="end"
+            android:layout_marginTop="-10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appName"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/appNameTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_title2"
+            android:textSize="10sp"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appNameTitle1"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/urlTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/appNameTitle2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/clientUrl"
+                android:text="@={viewmodel.clientUrl}"
+                android:fontFamily="@font/poppins_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/url_hint"
+                android:inputType="textUri"
+                android:selectAllOnFocus="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/urlTextInputLayout"
+            app:layout_constraintStart_toStartOf="@id/urlTextInputLayout"
+            android:text="Invalid URL"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginStart="5dp"
+            android:visibility="@{validationError.urlValid ? View.VISIBLE : View.GONE}"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/urlTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/login"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true"
+                android:text="@={viewmodel.username}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/usernameTextInputLayout"
+            app:layout_constraintStart_toStartOf="@id/usernameTextInputLayout"
+            android:text="Enter your username"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginStart="5dp"
+            android:visibility="@{validationError.usernameValid ? View.VISIBLE : View.GONE}"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewmodel.password}"
+                android:id="@+id/password"
+                android:fontFamily="@font/poppins_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:imeActionLabel="@string/log_in"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout"
+            app:layout_constraintStart_toStartOf="@id/passwordTextInputLayout"
+            android:text="Enter your password"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginStart="5dp"
+            android:visibility="@{validationError.passwordValid ? View.VISIBLE : View.GONE}"/>
+
+
+        <Button
+            android:onClick="@{() -> viewmodel.onClick()}"
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
+            android:enabled="true"
+            android:fontFamily="@font/poppins_light"
+            android:paddingLeft="30dp"
+            android:paddingTop="20dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="20dp"
+            android:text="@string/log_in"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
+            app:layout_constraintVertical_bias="0.2" />
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/loading"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
